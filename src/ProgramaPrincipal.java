@@ -1,9 +1,19 @@
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
+
 import java.util.*;
 
 public class ProgramaPrincipal {
 
     public static final String CUBOS = "Cubos";
-    private static Map<String,List<? extends Poliedro>>mapPoliedro = new HashMap<>();
+    public static final String OCTAEDROS = "Octaedros";
+    public static final String TETRAEDROS = "Tetraedros";
+    public static final String DODECAEDROS = "Dodecaedros";
+    public static final String ICOSAEDROS = "Icosaedros";
+
+    static ListMultimap<String, Poliedro> tipoPoliedroMultimap = ArrayListMultimap.create();
+    static ListMultimap<String, Poliedro> colorPoliedroMultimap = ArrayListMultimap.create();
+
 
     public static void main(String[] args) {
 
@@ -30,10 +40,14 @@ public class ProgramaPrincipal {
         mostrarMapPoliedros();
 
         consultarMapPoliedros(CUBOS);
+        consultarMapPoliedros(ICOSAEDROS);
+        consultarMapPoliedros(DODECAEDROS);
+        consultarMapPoliedros(OCTAEDROS);
+        consultarMapPoliedros(TETRAEDROS);
     }
 
     private static void consultarMapPoliedros(String tipoPoliedro) {
-        List<Poliedro> poliedroList = (List<Poliedro>) mapPoliedro.get("tipoPoliedro");
+        List<Poliedro> poliedroList = (List<Poliedro>) tipoPoliedroMultimap.get(tipoPoliedro);
         System.out.println("La lista de" + tipoPoliedro + "es: ");
         System.out.println(poliedroList);
     }
@@ -108,6 +122,9 @@ public class ProgramaPrincipal {
             }
 
 
+
+
+
         }
 
 
@@ -129,12 +146,14 @@ public class ProgramaPrincipal {
     }
 
     private static void mostrarMapPoliedros() {
-        System.out.println("Map de Poliedros: ");
-        System.out.println(mapPoliedro);
+        System.out.println("Map de Poliedros por tipo: ");
+        System.out.println(tipoPoliedroMultimap);
+        System.out.println("Map de Poliedros por colores: ");
+        System.out.println(colorPoliedroMultimap);
     }
 
     private static void ObtenerIcosaedro(Scanner sc, List<Poliedro> arrayList, int numero) {
-        List<Icosaedro> icosaedroList = new ArrayList<>();
+
         for (int i = 1; i <= numero; i++)
 
         {
@@ -145,13 +164,13 @@ public class ProgramaPrincipal {
 
             Icosaedro icosaedro = new Icosaedro(arista, i+ numero * 4, colorSeleccionado);
             arrayList.add(icosaedro);
-            icosaedroList.add(icosaedro);
+            colorPoliedroMultimap.put(colorSeleccionado,icosaedro);
+            tipoPoliedroMultimap.put(ICOSAEDROS, icosaedro);
         }
-        mapPoliedro.put("Icosaedros",icosaedroList);
+
     }
 
     private static void ObtenerDodecaedro(Scanner sc, List<Poliedro> arrayList, int numero) {
-        List<Dodecaedro> dodecaedroList = new ArrayList<>();
         for (int i = 1; i <= numero; i++)
 
         {
@@ -162,13 +181,15 @@ public class ProgramaPrincipal {
 
             Dodecaedro dodecaedro = new Dodecaedro(arista, i+ numero * 3, colorSeleccionado); //no entiendo?¿?
             arrayList.add(dodecaedro);
-            dodecaedroList.add(dodecaedro);
+            colorPoliedroMultimap.put(colorSeleccionado,dodecaedro);
+            tipoPoliedroMultimap.put(DODECAEDROS, dodecaedro);
+
         }
-        mapPoliedro.put("Dodecaedros",dodecaedroList);
+
     }
 
     private static void ObtenerTetraedro(Scanner sc, List<Poliedro> arrayList, int numero) {
-        List<Tetraedro> tetraedroList = new ArrayList<>();
+
         for (int i = 1; i <= numero; i++)
 
         {
@@ -180,14 +201,15 @@ public class ProgramaPrincipal {
 
             Tetraedro tetraedro = new Tetraedro(arista, i+ numero * 2, colorSeleccionado);
             arrayList.add(tetraedro);
-            tetraedroList.add(tetraedro);
+
+            colorPoliedroMultimap.put(colorSeleccionado,tetraedro);
+            tipoPoliedroMultimap.put(TETRAEDROS, tetraedro);
         }
-        mapPoliedro.put("Tetraedros",tetraedroList);
 
     }
 
     private static void ObtenerOctaedro(Scanner sc, List<Poliedro> arrayList, int numero) {
-        List<Octaedro> octaedroList = new ArrayList<>();
+
         for (int i = 1; i <= numero; i++)
 
         {
@@ -198,14 +220,15 @@ public class ProgramaPrincipal {
 
             Octaedro octaedro = new Octaedro(arista, i+ numero, colorSeleccionado);
             arrayList.add(octaedro);
-            octaedroList.add(octaedro);
+
+            colorPoliedroMultimap.put(colorSeleccionado,octaedro);
+            tipoPoliedroMultimap.put(OCTAEDROS, octaedro);
         }
-        mapPoliedro.put("Octaedros",octaedroList);
 
     }
 
     private static void ObtenerCubo(Scanner sc, List<Poliedro> arrayList, int numero) {
-        List<Cubo> cuboList = new ArrayList<>();
+
         for (int i = 1; i <= numero; i++)
 
         {
@@ -216,10 +239,12 @@ public class ProgramaPrincipal {
 
             Cubo cubo = new Cubo(arista, +i, colorSeleccionado);
             arrayList.add(cubo);
-            cuboList.add(cubo);
+
+            colorPoliedroMultimap.put(colorSeleccionado,cubo);
+            tipoPoliedroMultimap.put(CUBOS, cubo);
 
         }
-        mapPoliedro.put(CUBOS,cuboList);
+
     }
 
 

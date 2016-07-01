@@ -14,6 +14,7 @@
             return "Tetraedro{" +
                     "id=" + id +
                     ", arista=" + arista +
+                    "color=" + color +
                     "}";
         }
 

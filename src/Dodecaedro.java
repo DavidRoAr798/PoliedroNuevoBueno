@@ -13,6 +13,7 @@ public class Dodecaedro extends Poliedro {
         return "Dodecaedro{"+
                 "id=" + id +
                 ", arista=" + arista +
+                "color=" + color +
                 "}";
     }
 }

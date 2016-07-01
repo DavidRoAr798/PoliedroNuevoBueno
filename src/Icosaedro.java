@@ -13,6 +13,7 @@ public class Icosaedro extends Poliedro {
         return "Icosaedro{"+
                 "id=" + id +
                 ", arista=" + arista +
+                "color=" + color +
                 "}";
     }
 

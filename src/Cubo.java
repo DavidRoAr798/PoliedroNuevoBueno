@@ -17,7 +17,7 @@ public class Cubo extends Poliedro {
                 "id=" + id +
                 ", arista=" + arista +
                 "color=" + color +
-                "}";
+                "}" ;
     }
 
 }

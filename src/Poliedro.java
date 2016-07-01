@@ -1,5 +1,3 @@
-//Comentario
-
 public abstract class Poliedro {
     protected long id;
     protected String color;
